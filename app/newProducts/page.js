@@ -7,9 +7,10 @@ export default function newProducts() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
-    function createProduct(){
+    async function createProduct(ev){
+        ev.preventDefault();
         const data = {title, description, price};
-        axios.post('/api/products', data)
+        await axios.post('/api/auth/[...nextauth]/products', data)
     }
 
     return (
