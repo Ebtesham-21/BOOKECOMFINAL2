@@ -7,6 +7,14 @@ input {
     @apply mb-2;
 }
 
-input:focus {
+input:focus, textarea:focus {
     @apply border-red-600 border-2;
+}
+
+h1{
+    @apply mb-2 text-xl font-bold ;
+}
+
+label {
+    @apply text-red-600;
 }
