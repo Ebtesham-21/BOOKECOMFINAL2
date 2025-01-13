@@ -10,7 +10,7 @@ export default function newProducts() {
     async function createProduct(ev){
         ev.preventDefault();
         const data = {title, description, price};
-        await axios.post('/api/auth/[...nextauth]/products', data)
+        await axios.post('/api/products', data);
     }
 
     return (
