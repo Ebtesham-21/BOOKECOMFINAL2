@@ -1,4 +1,4 @@
-import { schema } from "moongose/models/user_model"
+import { schema, model, models } from "moongose/models/user_model";
 
 const ProductSchema = new schema({
     title: {type: String, required: true},
@@ -6,4 +6,4 @@ const ProductSchema = new schema({
     price: {type: Number, required: true},
 });
 
-export const Product = model('product', ProductSchema);
+export const Product = models.Product || model('Product', ProductSchema);

@@ -1,9 +1,18 @@
-import clientPromise from "../lib/mongodb";
+import { Product } from "@/models/product";
 
-export default function handle(req, res) {
+import { mongooseConnnect } from "../lib/mongoose";
+
+export default async function handle(req, res) {
     const {method} = req;
-    mongoose.Promise = clientPromise;
+    await mongooseConnnect();
     if(method === 'POST'){
-        res.json('post');
+        const{title, description,price} = req.body;
+        const productDoc =  await Product.create(
+            {
+                title, description, price, 
+            }
+        )
+
+        res.json(productDoc);
     }
 }
