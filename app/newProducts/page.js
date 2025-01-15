@@ -9,17 +9,26 @@ export default function newProducts() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
-    const [goToProducts, setGoToProducts] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const router = useRouter();
-    async function createProduct(ev){
+    async function createProduct(ev) {
         ev.preventDefault();
-        const data = {title, description, price};
-        await axios.post('/api/products', data);
-        setGoToProducts(true);
-    }
-   
-    if(goToProducts) {
-        return router.push('/products');
+
+        if(isSubmitting) return;
+        setIsSubmitting(true);
+
+        try {
+            const data = {title, description, price};
+            const response = await axios.post("http://localhost:3000/products", data);
+
+            if(response.status === 201) {
+                router.push("/products");
+            }
+        } catch (error) {
+            console.error("Failed to create product: ",  error);
+        } finally {
+            setIsSubmitting(false);
+        }
     }
 
     return (
@@ -46,7 +55,11 @@ export default function newProducts() {
              />
             <button
             type="submit"
-            className="btn-primary" >Save</button>
+            className="btn-primary" 
+            disabled={isSubmitting}
+            >
+                {isSubmitting ? "Saving...": "Save"}
+            </button>
             </form>
         </Layout>
     )

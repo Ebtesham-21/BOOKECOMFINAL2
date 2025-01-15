@@ -46,8 +46,11 @@ async function connectToDatabase() {
 }
 
 export async function POST(req) {
+    console.log("Received a post req");
     try {
         const body = await req.json();
+        console.log("Request body:", body);
+
         const {title, description, price} = body;
 
         if(!title || !description || !price) {
@@ -67,6 +70,8 @@ export async function POST(req) {
             createdAt: new Date(),
         });
 
+        console.log("Product inserted:", result);
+
         return new Response(
             JSON.stringify({
                 message: "Product created succcessfully",
@@ -80,10 +85,16 @@ export async function POST(req) {
             {status: 201}
         );
     } catch (error) {
-        console.error("Error creating product", error);
+        console.error("Error creating product: ", error);
         return new Response(
             JSON.stringify({ error: "Falied to create product"}),
             {status: 500}
         );
     }
+}
+
+export async function GET() {
+    return new Response(JSON.stringify({message: "GET request to /api/products"}), {
+        status: 200,
+    });
 }
