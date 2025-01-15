@@ -19,7 +19,7 @@ export default function newProducts() {
 
         try {
             const data = {title, description, price};
-            const response = await axios.post("http://localhost:3000/products", data);
+            const response = await axios.post("http://localhost:3000/api/products", data);
 
             if(response.status === 201) {
                 router.push("/products");
