@@ -1,11 +1,13 @@
-import mongoose from "mongoose";
+// models/Product.js
+import mongoose, { Schema, model, models } from "mongoose";
 
-const ProductSchema = new mongoose.Schema({
-    title: {type: String, required: true},
-    description: {type: String},
-    price: {type: Number, required: true},
-});
+const ProductSchema = new Schema({
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    price: { type: Number, required: true },
+}, { timestamps: true });
 
-const Product = mongoose.models.Product || mongoose.model("Product", ProductSchema);
+// Use `models.Product` if it exists, otherwise create the model
+const Product = models.Product || model("Product", ProductSchema);
 
 export default Product;
