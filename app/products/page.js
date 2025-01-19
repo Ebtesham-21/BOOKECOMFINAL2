@@ -39,11 +39,7 @@ export default function Products() {
                                 <td>{product.title}</td>
                                 <td>{product.description}</td>
                                 <td>${product.price}</td>
-                                <td>
-                                
-                                    <button>Edit</button>
-                                 
-                                </td>
+                            
                                 <td>
                                     <Link href={'/products/' + product._id}>Edit</Link>
 
