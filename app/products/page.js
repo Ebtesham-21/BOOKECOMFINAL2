@@ -23,7 +23,7 @@ export default function Products() {
             <Link className="bg-red-600 rounded-md text-white py-2 px-2" href="/newProducts">
                 Add New Product
             </Link>
-            <table>
+            <table className="basic mt-6">
                 <thead>
                     <tr>
                         <th>Product Name</th>
@@ -40,10 +40,15 @@ export default function Products() {
                                 <td>{product.description}</td>
                                 <td>${product.price}</td>
                                 <td>
-                                    {/* Add buttons or actions for editing or deleting products */}
+                                
                                     <button>Edit</button>
-                                    <button>Delete</button>
+                                 
                                 </td>
+                                <td>
+                                    <Link href={'/products/' + product._id}>Edit</Link>
+
+                                </td>
+                               
                             </tr>
                         ))
                     ) : (

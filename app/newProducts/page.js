@@ -4,7 +4,7 @@ import Layout from "../components/Layout";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-export default function newProducts() {
+export default function NewProducts() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
@@ -14,7 +14,7 @@ export default function newProducts() {
     async function createProduct(ev) {
         ev.preventDefault();
 
-        if (isSubmitting) return;
+        if (isSubmitting) return; // Prevent multiple submissions
         setIsSubmitting(true);
 
         // Basic form validation
@@ -25,18 +25,14 @@ export default function newProducts() {
         }
 
         try {
-            const data = {
-                title,
-                description,
-                price: parseFloat(price), // Ensure price is a number
-            };
-            const response = await axios.post("/api/products", data);
+            const data = { title, description, price: parseFloat(price) };
+            const response = await axios.post("/api/products", data); // Ensure the POST request is correct
 
             if (response.status === 201) {
-                router.push("/products");
+                router.push("/products"); // Redirect to products page after successful creation
             }
         } catch (error) {
-            console.error("Failed to create product: ", error);
+            console.error("Failed to create product:", error);
             alert("An error occurred while creating the product.");
         } finally {
             setIsSubmitting(false);
@@ -50,26 +46,21 @@ export default function newProducts() {
                 <label>Product Name</label>
                 <input
                     type="text"
-                    placeholder="Book Name"
+                    placeholder="Product Name"
                     value={title}
-                    onChange={ev => setTitle(ev.target.value)} />
+                    onChange={(ev) => setTitle(ev.target.value)} />
                 <label>Description</label>
                 <textarea
                     placeholder="Description"
                     value={description}
-                    onChange={ev => setDescription(ev.target.value)} />
-
+                    onChange={(ev) => setDescription(ev.target.value)} />
                 <label>Price (in USD)</label>
                 <input
                     type="number"
                     placeholder="Price"
                     value={price}
-                    onChange={ev => setPrice(ev.target.value)} />
-
-                <button
-                    type="submit"
-                    className="btn-primary"
-                    disabled={isSubmitting}>
+                    onChange={(ev) => setPrice(ev.target.value)} />
+                <button type="submit" disabled={isSubmitting}>
                     {isSubmitting ? "Saving..." : "Save"}
                 </button>
             </form>
