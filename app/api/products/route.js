@@ -1,10 +1,9 @@
 // app/api/products/route.js
-
-import connectToDatabase from "@/lib/mongoose";
+import connectToDatabase from "@/lib/connectToDatabase";
 import Product from "@/models/Product";
 
 export async function POST(req) {
-    await connectToDatabase(); 
+    await connectToDatabase();  // Connect to MongoDB
 
     try {
         const body = await req.json();

@@ -1,5 +1,4 @@
-// models/Product.js
-import mongoose, { Schema, model, models } from "mongoose";
+import { Schema, models, model } from "mongoose";
 
 const ProductSchema = new Schema({
     title: { type: String, required: true },
@@ -7,7 +6,6 @@ const ProductSchema = new Schema({
     price: { type: Number, required: true },
 }, { timestamps: true });
 
-// Use `models.Product` if it exists, otherwise create the model
 const Product = models.Product || model("Product", ProductSchema);
 
 export default Product;
